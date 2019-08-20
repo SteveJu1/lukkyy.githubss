@@ -1,0 +1,471 @@
+---
+layout:     post
+title:      "上手项目，从Git开始 "
+date:       2016-11-03 
+categories: Other
+tags: Git 
+---
+
+
+## 一 、版本控制系统
+为啥要用Git呀，用来做什么啊？
+&emsp;&emsp;当我们学了基础的知识后，总希望自己能做出一些东西来（比如说游戏、实用的产品啊），可又不知道从哪里下手，同时还有这样的困惑：我做的有实际价值吗，别人是否做过了。这时候就需要了解下Github了，作为世界上最大的项目开源社区，各路牛人分享了自己做的项目和源码。我们可以欣赏他们优秀的作品，也可以自己去实现它。这时候就需要一个工具了—— Git ，Git是分布式的版本控制系统，我们可以通过Git查看这些优秀的是如何一步步实现的。下面将系统的介绍下Git的相关知识。
+#### 1. 版本控制系统
+&emsp;&emsp;给项目命名时，我们通常会根据版本号或时间来记录不同的版本。比如像这样：
+![](./assets/other//git.png)
+&emsp;&emsp;文件进行多次的修改后，我们想要找回某一次的修改记录，查找起来会很麻烦。随着不同的版本越来越多，管理起来会很复杂。如果是多人合作开发的项目，修改合并非常容易出现冲突。这时候就需要版本控制系统（Version Control System，VCS）帮助我们管理文件和项目了。
+&emsp;&emsp;版本控制系统是记录文件**内容变化**，查阅特定**版本修订情况**的系统。有了他可以跟踪文件的改动，回到历史记录的某个时刻。
+
+#### 2 版本控制系统管理文件有哪些? 
+&emsp;&emsp; 所有的版本控制系统（包括Git，SVN等），只能跟踪文本信息的改动，比如文本文件 (.txt) 、脚本文件 (.py)和各种基于文本信息的文件等;例如对TXT文件做了改动，版本控制系统可以告诉你是在文本第几行加了一个单词“Linux”，在第几行删了一个单词“Windows”等。
+&emsp;&emsp;对于图片、视频等二进制文件或是其他格式的文件，版本控制没法跟踪文件的具体的变化（没法知道这些文件的数据修改的具体情况），只知道发生了修改。
+Note： 建议文本信息使用UTF-8编码（Notepad++的编码设置为UTF-8 without BOM）
+
+#### 3 版本控制系统分类
+
+版本控制系统可分为：集中式和分布式版本控制系统
+&emsp;&emsp;集中式版本控制系统（SVN、CVS等）：版本库集中存放在**一个的服务器**，文件的所有修订，开发人员合作都要通过这台服务器修改。优缺点：管理方便、逻辑明确；必须联网才能工作.示意图如下：
+![](./assets/other/git2.png)
+&emsp;&emsp;分布式版本控制系统（Git）：没有中央服务器，每个人都可以把仓库clone到下来（仓库可理解为所有的项目文件）。然后在自己的电脑上对仓库做修改，如果要和别人合作，可以把项目pull给别人。优缺点：适合分布式开发，可以离线工作。
+![](./assets/other/serves.png)
+
+### 4  Git与GitHub、GitLab的区别？
+&emsp;&emsp;Git 是一个**分布式版本控制系统**。我们通过Git 在本地创建仓库，记录不同文件的版本信息。GitHub是Git 仓库的**托管平台**，把自己的Git仓库存放到GitHub的网络平台上（note：因为GitHub只支持Git 作为唯一的版本库格式，所以叫GitHub）
+&emsp;GitHub、GitLab都是 Git 仓库托管平台，但GitHub创建私有的代码仓库需要付费，GitLab允许免费设置私有仓库（国内还有 码云 等Git平台，下载的网速要快很多）。
+
+## 二 、Git安装
+####  1 安装
+&emsp;&emsp;安装 git 的方式在每种系统中各不相同，最简单的是直接去 git 官网下载, 让网站自动识别你的系统, 提供下载文件，关于教程官方也给出了文档，链接如下：
+  &emsp;&emsp;  [Git官网下载](https://git-scm.com/downloads)     &emsp;&emsp;  [Git 官方安装文档](https://git-scm.com/book/zh/v2/起步-安装-Git)
+&emsp;&emsp;以Windows版本举个栗子，Git 也为 Windows 系统提供了 `.exe` 安装包, 直接从这里下载安装就可以了: https://git-scm.com/download/win ；推荐使用默认安装参数, 然后一路`下一步`到底. 安装好之后, 在桌面将会出现 `Git Bash`的程序；打开如下图所示：（Bash窗口是 git 在 Windows 上设置的一个Unix 的环境.）
+![](./assets/other/cmd.png)
+
+####  2 Git 介绍
+ Git 项目有三个工作区域：工作目录、暂存区域、仓库
+&emsp;&emsp;**工作目录**就是我们修改或写入文件的地方。 **暂存区域**是一个文件，保存了下次将提交的文件列表信息，类似于`‘索引’的作用。 **仓库（Repository）**是 Git 用来保存项目的元数据和对象数据库的地方。位于.git文件目录下（默认下看不到），其它计算机克隆仓库时，拷贝的就是这里的数据。
+![](./assets/other/change.png)
+Git 的工作流程：1.在工作目录中修改文件； 2.暂存文件，将文件的快照放入暂存区域；3.提交更新，从暂存区域将快照存储到 Git 仓库目录。（快照是Git识别文件的）。
+
+Git的文件的4种状态（status），不同状态之间可通过命令转换：
+工作目录中新建了文件 `1.txt`，还没被Git识别时；    `status：untracked` 
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;    `bash： git add       ` 
+文件 `1.txt`通过 add 命令，将文件进入了暂存区域                ` status：  Staged`
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;                                                       `bash： git commit       ` 
+ 文件`1.txt`被提交commit到了仓库里                                              `status： Unmodified`
+文件提交到仓库后，任务可以说完成了。如果后面我们对 `1.txt`进行了修改 ，状态会改变              `status： Modified`
+这是改变的文件需要重新 add ，commit到 仓库；
+整个上述过程可以被这张 git 官网上的流程图直观地表现:
+![](./assets/other/GitStatus.png)
+
+## 三 、Git的初始化和配置
+####  1 初始化创建版本库
+&emsp;&emsp;版本库又名仓库（repository）。里面的所有文件的修改、删除操作都被记录下来，任何时刻的更改都可以被还原。我们先确定对哪个文件夹里的文件进行管理. 比如桌面上的一个叫 `github_md` 的文件夹. 在文件目录的路径下运行 Terminal 的命令
+
+```
+$ mkdir C:Users/Qi/Desktop/github_md 
+$ cd C:Users/Qi/Desktop/github_md
+```
+&emsp;&emsp;为了记录对文件修改的人，需要配置下用户名 `user.name` 和用户的邮箱 `user.email`:
+
+```
+$ git config --global user.name "Liu Qi"
+$ git config --global user.email "liuqi.steven@qq.com"
+```
+
+&emsp;&emsp;如果使用了`--global`选项（只需要运行一次）之后无论你在做任何事情都会使用这些信息。 设置不同的用户名称与邮件地址以运行没有` --global`选项的命令。
+&emsp;&emsp;git初始化：该命令将创建一个名为 .git 的子目录， 用来管理不同的版本文件（`.git` 是被隐藏起来的，可执行 `$ ls  -a` 查看）
+```
+$ git init
+Initialized empty Git repository in C:/Users/Qi/Desktop/github_md/.git/
+```
+
+------
+####  2 添加文件管理 (add) 
+&emsp;&emsp;建立一个新的 `1.py` 文件（如果使用命令是`$ touch 1.py`）:使用 `git status` 检查当前文件状态 :
+```bash
+$ git status
+# 输出
+On branch master    # 在 master 分支
+Initial commit
+Untracked files:    
+  (use "git add <file>..." to include in what will be committed)
+&emsp;&emsp;1.py        # 1.py 文件没有被加入版本库 (unstaged)
+nothing added to commit but untracked files present (use "git add" to track)
+```
+&emsp;&emsp;现在 `1.py` 并没有被放入版本库中 (unstaged), 所以我们要使用 `add` 把它添加进版本库 (staged):
+
+```bash
+$ git add 1.py
+$ git status # 再次查看状态 status
+# 输出
+On branch master
+Initial commit
+Changes to be committed:              #说明是已暂存状态
+  (use "git rm --cached <file>..." to unstage)
+	new file:   1.py    # 版本库已识别 1.py (staged)
+```
+&emsp;&emsp;如果想一次性添加文件夹中所有未被添加的文件, 可以使用`$ git add .`
+
+------
+
+####  3 提交改变 (commit) 
+&emsp;&emsp;最后一步就是提交这次的改变, 并在 `-m` 写修改的信息:
+
+```bash
+$ git commit -m "create 1.py"
+# 输出
+[master (root-commit) 6bd231e] create 1.py
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 1.py
+```
+&emsp;&emsp;现在提交仓库完整的流程就运行完了，我们可以通过上述方法把自己的项目上传到仓库。
+
+------
+
+## 四 、克隆仓库和版本管理
+####  1 克隆现有的仓库
+&emsp;&emsp;如果想获得一份已经存在了的 Git 仓库，也就是把别人的项目下载下来，使用 `git clone [url]`  
+```
+$ git clone https://github.com/jwasham/coding-interview-university
+```
+&emsp;&emsp;这会在目录下创建一个名为 “coding-interview-university” 的目录，并在目录下初始化一个 .git 文件夹，从远程仓库拉取下所有数据放入 .git 文件夹。 所有的项目文件在 coding-interview-university 文件夹里面。我们可以查看别人是怎么构建项目的。想改下载项目的名字的话
+`git clone [url] changedName`
+(note: 忽略文件,有些文件无需纳入 Git 的管理。比如日志文件，或者编译过程中创建的临时文件等。 我们可以创建一个名为 .gitignore的文件，列出要忽略的文件模式)
+
+------
+####  2 仓库的不同版本
+&emsp;&emsp; 项目clone下来后，想查看这个项目是如何修改的，可使用 `git log --oneline` 查看， （`--graph` 可查看当前项目的分支）
+
+```bash
+$ git log --oneline --graph
+# 输出
+* 47f167e back to change 1 and add comment for 1.py
+* 904e1ba change 2
+* c6762a1 change 1
+* 13be9a7 create 1.py
+```
+其中`904e1ba`这些就是版本号，我们可以通过版本号回到以前的版本。命令`git reset --hard 版本号`
+&emsp;&emsp; ​Note：在Git中每个版本（ `commit`）都有自己的 `id` 数字，指针`Head`指向哪个版本，我们就回到了哪个版本。
+```bash
+$ git log --oneline
+904e1ba change 2
+c6762a1 change 1
+13be9a7 create 1.py
+---------------------------------------------------------------------
+$ git reset --hard c6762a1
+
+$ git reset --hard HEAD^
+#^表示回到上一个，^^表示上上一个，依次类推；可简写成 ~2（数字表示前几个）
+```
+&emsp;&emsp; 回到之前的版本后，又想回到之后的版本怎么办？ git reflog 查看最近做的所有 HEAD 的改动
+```
+$ git reflog
+# 输出
+c6762a1 HEAD@{0}: reset: moving to c6762a1
+904e1ba HEAD@{1}: commit (amend): change 2
+0107760 HEAD@{2}: commit: change 2
+c6762a1 HEAD@{3}: commit: change 1
+13be9a7 HEAD@{4}: commit (initial): create 1.py
+
+$ git reset --hard 904e1ba  
+```
+ 命令 `git log `可以回顾历史记录，不用参数的话会按提交时间列出所有的更新，包括作者的名字和电子邮件地址、提交时间以及提交说明等等。 查看简略的统计信息，可以使用 --oneline， --stat 选项 ；选项 -p 可用来显示每次提交的内容差异。
+## 五、Git版本管理的其他命令
+#### 1 管理不同分支
+建立分支 `dev`, 并查看所有分支`git branch`:
+```bash
+$ git branch dev    # 建立 dev 分支
+$ git branch        # 查看当前分支
+  dev       
+* master    # * 代表了当前的 HEAD 所在的分支
+```
+ 创建和切换到新建的分支,也可以使用`checkout -b
+
+```bash
+$ git checkout -b  dev
+Switched to a new branch 'dev'
+
+$ git checkout dev
+$ git branch
+# 输出
+* dev        # 这时 HEAD 已经被切换至 dev 分支
+  master
+```
+删除dev 分支
+```bash 
+$ git branch -d dev
+```
+#### 2 将 dev 的修改推送到 master
+`dev`分支上对文件夹中的文件进行修改,不会影响到 `master` 分支,比如在`dev`分支上我们在 `1.py` 上加入这一行 `#changed in dev branch`, 然后再 `commit`:
+```
+$ git commit -am "change 3 in dev"  # "-am": add 所有改变 并直接 commit
+```
+首先我们要切换到 `master`, 再将 `dev` 推送过来.
+```
+$ git checkout master   # 切换至 master 才能把其他分支合并过来
+$ git merge dev         # 将 dev merge 到 master 中
+$ git log --oneline --graph
+
+# 输出
+* f9584f8 change 3 in dev
+* 47f167e back to change 1 and add comment for 1.py
+* 904e1ba change 2
+* c6762a1 change 1
+* 13be9a7 create 1.py
+```
+​      如果直接 `git merge dev`, git 会采用默认的 `Fast forward` 格式进行 `merge`, 这样 `merge` 的这次操作不会有 `commit` 信息. `log` 中也不会有分支的图案. 我们可以采取 `--no-ff` 这种方式保留 `merge` 的 `commit` 信息,如下所示：
+
+```
+$ git merge --no-ff -m "keep merge info" dev         # 保留 merge 信息
+$ git log --oneline --graph
+
+# 输出
+*   c60668f keep merge info
+|\  
+| * f9584f8 change 3 in dev         # 这里就能看出, 我们建立过一个分支
+|/  
+* 47f167e back to change 1 and add comment for 1.py
+* 904e1ba change 2
+* c6762a1 change 1
+* 13be9a7 create 1.py
+```
+
+------
+
+#### 3 Git撤销修改
+
+1. 查看具体的修改内容
+1.1 查看 unstaged
+&emsp;&emsp; 如果想要查看这次还没 `add` (unstaged) 的修改部分和上个已经 `commit` 的文件有何不同, 我们将使用 
+`$ git diff`:
+1.2 查看 staged (--cached) 
+&emsp;&emsp;  如果你已经 `add` 了这次修改, 文件变成了 “可提交状态” (staged), 我们可以在 `diff` 中添加参数 `--cached` 来查看修改:
+------
+1.3 同时查看 staged & unstaged (HEAD) 
+&emsp;&emsp;  还有种方法让我们可以查看 `add` 过 (staged) 和 没 `add` (unstaged) 的修改,`$ git diff HEAD ` 
+
+ 2.1 修改已 commit 的版本
+&emsp;&emsp; 有时候我们 `commit`后却发现漏掉了几个文件没有`commit`。 比如想 `commit` `1.pyt和2.py`，结果这样写的
+```
+$  git add 1.py
+$  git commit -m "add two files"
+[master 20dff6a] add two files
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+```
+但是可以运行带有 `--amend `选项的提交命令重新提交： 
+
+```
+$ git add 2.py
+$ git commit --amend --no-edit           # "--no-edit": 不编辑, 直接合并到上一个commit，可不加
+$ git log --oneline                      # "--oneline": 每个 commit 内容显示在一行
+# 01a6a14 (HEAD -> master) add two files # 合并过的 add two files
+```
+##### 2.2 reset 回到 add 之前
+&emsp;&emsp;有时我们添加 `add` 了修改, 但是又后悔, 并想补充一些内容再 `add`. 这时, 我们有一种方式可以回到 `add` 之前. 比如在 `1.py` 文件中添加这一行:
+```
+# 修改 1.py 成为 modified状态, add 到staged
+$ git add 1.py    
+$ git status -s 
+M  1.py         # staged
+---------------------------------------------------------------------
+# 回到 modified状态重新编辑
+$ git reset 1.py
+Unstaged changes after reset:
+M	1.py
+---------------------------------------------------------------------
+$ git status -s
+# 输出
+ M 1.py     # unstaged
+```
+------
+ 3 单个文件checkout
+&emsp;&emsp;之前我们使用 `reset` 的时候是针对整个版本库, 回到版本库的某个过去. 不过如果我们只想回到某个文件的过去, 又该怎么办呢?
+
+```bash
+$ git log --oneline
+# 输出
+904e1ba change 2
+c6762a1 change 1
+13be9a7 create 1.py
+# 让 1.py 回到c6762a1版本下的 1.py，这时 1.py 文件的内容就变成以前的呢
+$ git checkout c6762a1 -- 1.py
+```
+&emsp;&emsp;如果直接 `git merge dev`, git 会采用默认的 `Fast forward` 格式进行`merge`, 这样 `merge` 的这次操作不会有 `commit` 信息. `log` 中也不会有分支的图案. 我们可以采取 `--no-ff` 这种方式保留 `merge` 的 `commit` 信息,如下所示：
+
+```
+$ git merge --no-ff -m "keep merge info" dev         # 保留 merge 信息
+$ git log --oneline --graph
+
+# 输出
+*   c60668f keep merge info
+|\  
+| * f9584f8 change 3 in dev         # 这里就能看出, 我们建立过一个分支
+|/  
+* 47f167e back to change 1 and add comment for 1.py
+* 904e1ba change 2
+* c6762a1 change 1
+* 13be9a7 create 1.py
+```
+------
+#### 1.5 merge 分支冲突
+&emsp;当创建了一个分支后, 我们同时对两个分支都进行了修改.比如在:
+- `master` 中的 `1.py` 加上 `# edited in master`.
+- `dev` 中的 `1.py` 加上 `# edited in dev`.
+&emsp;&emsp;当我们再 `merge dev` 的时候, 冲突就来了. 因为 git 不知道应该怎么处理 `merge` 时, 在 `master` 和 `dev` 的不同修改. 
+&emsp;&emsp;具体的冲突, git 已经帮我们标记出来, 我们打开 `1.py` 就能看到，这时需要我们自己手动修改文件，然后再 `commit` 现在的文件, 冲突就解决啦.
+
+```
+$ git commit -am "solve conflict"
+```
+
+#### 2.3 远程仓库的使用 
+&emsp;&emsp; 远程仓库是指**托管**在因特网或其他网络的你的项目的版本库。 你可以有好几个远程仓库，通常有些仓库对你只读，有些则可以读写。为了能在任意 Git 项目上协作，你需要知道如何管理自己的远程仓库。 
+
+##### 2 查看远程仓库 
+
+&emsp;&emsp; git remote 命令。 它会列出你指定的每一个远程服务器的简写。 如果你已经克隆了自己的仓库，那么至少应该能看到 origin - 这是 Git 给你克隆的仓库服务器的默认名字： 
+```
+$ git clone https://github.com/schacon/ticgit
+$ cd ticgit
+$ git remote
+# origin 
+```
+&emsp;&emsp; 如果你的远程仓库不止一个，该命令会将它们全部列出。 例如，与几个协作者合作的，拥有多个远程仓库的仓
+库看起来像下面这样：
+```
+$ cd grit
+$ git remote -v
+bakkdoor https://github.com/bakkdoor/grit (fetch)
+bakkdoor https://github.com/bakkdoor/grit (push)
+origin git@github.com:mojombo/grit.git (push) 
+...
+```
+#### 2.1 临时修改 (stash)
+&emsp;&emsp; 想想有天在开开心心地改进代码, 突然接到老板的一个电话说要改之前的一个程序. 怎么办? 虽然还需要很久时间才能改进完自己的代码, 可我有强迫症, 又不想把要改的程序和自己改进代码的部分一起 `commit` 了.
+&emsp;&emsp; 这时 `stash` 就是我的救星了. 用 `stash` 能先将我的那改进的部分放在一边分隔开来. 再另外单独处理老板的任务.
+&emsp;&emsp; 假设我们现在在 `dev` 分支上快乐地改代码:
+```
+$ git checkout dev
+```
+&emsp;&emsp; 在 `dev` 中的 `1.py` 中加上一行 `# feel happy`, 然后老板的电话来了, 可是我还没有改进完这些代码. 所以我就用 `stash` 将这些改变暂时放一边.
+```
+$ git status -s
+# 输出
+ M 1.py
+------------------ 
+$ git stash
+# 输出
+Saved working directory and index state WIP on dev: f7d2e3a change 3 in dev
+HEAD is now at f7d2e3a change 3 in dev
+-------------------
+$ git status
+# 输出
+On branch dev
+nothing to commit, working directory clean  # 干净得很
+```
+
+#### 2.2 做其它任务 
+
+然后我们建立另一个 `branch` 用来完成老板的任务:
+```
+$ git checkout -b boss
+
+# 输出
+Switched to a new branch 'boss' # 创建并切换到 boss
+```
+
+&emsp;&emsp; 然后苦逼地完成着老板的任务, 比如添加 `# lovely boss` 去 `1.py`. 然后 `commit`, 完成老板的任务.
+```
+$ git commit -am "job from boss"
+$ git checkout master
+$ git merge --no-ff -m "merged boss job" boss
+```
+
+#### 2.3 恢复暂存 
+轻松了, 现在可以继续开心的在 `dev` 上刷代码了.
+```
+$ git checkout dev
+$ git stash list    # 查看在 stash 中的缓存
+
+# 输出
+stash@{0}: WIP on dev: f7d2e3a change 3 in dev
+```
+&emsp;&emsp; 上面说明在 `dev` 中, 我们的确有 `stash` 的工作. 现在可以通过 `pop` 来提取这个并继续工作了.
+```
+$ git stash pop
+
+# 输出
+On branch dev
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   1.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Dropped refs/stash@{0} (23332b7edc105a579b09b127336240a45756a91c)
+----------------------
+$ git status -s
+# 输出
+ M 1.py     # 和最开始一样了
+```
+#### 2.4 添加远程仓库
+&emsp;&emsp;  运行 git remote add <shortname> <url> 添加一个新的远程 Git 仓库，同时指定一个你可以轻松引用的简写：
+```bash
+$ git remote
+origin
+$ git remote add pb https://github.com/paulboone/ticgit
+$ git remote -v
+pb https://github.com/paulboone/ticgit (fetch)
+pb https://github.com/paulboone/ticgit (push)
+```
+&emsp;&emsp; 现在你可以在命令行中使用字符串 pb 来代替整个 URL。 例如，如果你想拉取 Paul 的仓库中有但你没有的信息，可以运行 git fetch pb： 
+
+```
+$ git fetch pb
+remote: Counting objects: 43, done.
+remote: Compressing objects: 100% (36/36), done.
+remote: Total 43 (delta 10), reused 31 (delta 5)
+Unpacking objects: 100% (43/43), done.
+From https://github.com/paulboone/ticgit
+     [new branch] master -> pb/master
+     [new branch] ticgit -> pb/ticgit
+```
+##### 从远程仓库中抓取与拉取
+&emsp;&emsp; 就如刚才所见，从远程仓库中获得数据，可以执行：
+```
+$ git fetch [remote-name]
+```
+&emsp;&emsp; 这个命令会访问远程仓库，从中拉取所有你还没有的数据。 执行完成后，你将会拥有那个远程仓库中所有分支的引用，可以随时合并或查看。 
+&emsp;&emsp; 如果你使用 clone 命令克隆了一个仓库，命令会自动将其添加为远程仓库并默认以 “origin” 为简写。 所以，git fetch origin 会抓取克隆（或上一次抓取）后新推送的所有工作。 必须注意 git fetch 命令会将数据拉取到你的本地仓库 - 它并不会自动合并或修改你当前的工作。 当准备好时你必须手动将其合并入你的工作。 
+##### 推送到远程仓库 
+
+&emsp;&emsp; 当你想分享你的项目时，必须将其推送到上游。 这个命令很简单：git push [remote-name] [branchname]。 当你想要将 master 分支推送到 origin 服务器时（再次说明，克隆时通常会自动帮你设置好那两个名字），那么运行这个命令就可以将你所做的备份到服务器 
+```
+$ git push origin master 
+```
+## 六、GitHub
+&emsp;&emsp;Github客户端是Git的图形界面窗口，功能不如Git强大，不过使用起来很方便。使用更多的是Github的网站，先在 [github](https://github.com/) 注册一个 github 账户, 然后添加你的一个 online 版本库 repository:    [Github客户端下载地址](https://desktop.github.com/)
+![](./assets/other/new-repository.png)
+
+连接本地版本库 
+
+ &emsp;&emsp;使用这节内容的初始例子文件, 然后将本地的版本库推送到网上:
+
+```
+$ git remote add origin https://github.com/lukkyy/git-demo.git
+$ git push -u origin master     # 推送本地 master 去 origin
+$ git remote rm origin          # 删除 origin，添加你自己的仓库
+$ git remote add origin " "
+```
+ &emsp;&emsp; git push时会弹出窗口，让用户输入账号密码
+![](./assets/other/GithubLogin.png)
+
+推送修改
+
+ &emsp;&emsp;如果在本地再进行修改, 比如在 `1.py` 文件中加上 `# happy github`, 然后 `commit` 并推上去:
+
+```
+$ git commit -am "change 5"
+$ git push -u origin master
+```
