@@ -1,0 +1,109 @@
+web开发
+
+网络开发分为B/S模式 和C/S模式，B/S模式是用户通过浏览器（Broswer）和服务器（Server）交互；
+
+C/S模式是通过客户端（Client）和服务器交互，比如想在电脑上玩吃鸡游戏，要先下载Steam平台才能玩，steam的软件就是客户端，还有想手机淘宝、Instagram等等都是客户端。与之不同的是B/S模式，都是通过Chrome、FireFox等浏览器显示网络传输的内容的。
+
+想要理解B/S架构，我们先了解信息是怎样在Broswer和Server之间传递的，我们在浏览器看到的一张张界面都是HTML文件，比如像这样。通过查看网页的源代码，
+
+HTML包括三部分：Client，css（负责界面的布局）,  javascript(负责界面的行为，)
+
+​    浏览器通过http/https协议和服务器通讯（三次握手，四次回归），通过发送response
+
+链接: https://pan.baidu.com/s/1Mbm3ZwycejtEDQYIKe_g8w 提取码: rr9l
+
+服务器接受来自浏览器的信息并进行解析，
+
+链接: https://pan.baidu.com/s/1Mx67oLFaBn7jmlYibtrtHQ 提取码: dkv1
+
+服务器调用数据库（）
+
+
+
+Tomcat配置踩得坑，Tomcat可以客户端安装，和下载库，
+
+出现环境变量安装错误的问题，解决方法 ：在cmd中运行，看出的错误在哪，根据错误提示安装，比按博客安装靠谱。https://blog.csdn.net/qq_40881680/article/details/83582484
+
+
+
+先要开启服务器，比如Tomcat, 再让Java程序再服务器上运行（run on server）
+
+比如新建了Dynamic Web Project项目web,项目下新建了html文件NewFile.html：就可以在浏览器访问这个网页（本地使用localhost:8080/web/NewFile.html）,html文件的格式如下：
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>title </title>
+</head>
+<body>
+      body content
+</body>
+</html>
+```
+
+
+
+#### HTML
+
+HTML常见的语法：< >   </ >这种符号是成对出现的， <html>：整个文档放里面；<head>：放字符集、标题、css、js样式等。<body>放要显示的内容； 其他标签可查询官方文档 www.w3school.com.cn ，（这些标签不用记住，用时查阅文档就行，开发web都是使用成熟的框架,新的标准使用HTML5了）
+
+
+
+HTML向服务器提交数据的方式：
+
+举个例子:表单是HTML常用来提交数据的一种方式，比如注册账号，填写登录信息等
+
+```html
+<form target="other.jsp" method="get">
+用户名:<input type="text" name="userName"><br>
+密码:<input type="password" name="passWord"><br>
+<input type="submit" name="提交">
+</form>
+```
+
+target 是消息发给谁；method是发送请求的方法分为两种“ get” 和“post”（get：发送的数据会在地址栏显示
+
+post不会显示，且发送的长度无限制）
+
+
+
+#### CSS  
+
+如果想要网页美观的话，就要用到CSS 了（Cascading style Sheets），它可以对网页的颜色，布局等等样式做修改。（就是设置标签大小、颜色、布局等等）
+
+怎么去使用CSS呢：大致有以下几种方法
+
+1 直接在标签后写
+
+2 把css写在<style>里，写成可以调用的属性（或是那个标签直接使用）
+
+3 外部导入css样式文件，具体操作如下
+
+```
+<p style="color: red; margin-left: 20px">
+This is a paragraph
+</p>
+##########################################
+<style type="text/css">
+body {background-color: red}   
+#body {background-color: red}  //调用时用class=body （如果是.用id）
+</style>
+###########################################
+<link rel="stylesheet" type="text/css" href="mystyle.css">
+```
+
+
+
+#### JavaScript
+
+**jQuery** 是一个 JavaScript 库，简化了 JS 编程
+
+**AJAX** = Asynchronous JavaScript and XML（异步的 JavaScript 和 XML），在不重新加载页面的情况下，可以使用AJAX 与服务器交换数据并更新部分网页
+
+**JSON**（JavaScript Object Notation）是存储和交换文本信息的。
+
+
+
+JSON 是存储和交换文本信息的语法。

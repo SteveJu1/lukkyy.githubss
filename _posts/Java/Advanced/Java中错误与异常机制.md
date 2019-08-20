@@ -1,31 +1,16 @@
----
-
-layout:     post
-title:      "Java中错误与异常机制 "
-date:       2017-01-15 
-categories: article
-tags: Blog
----
 ### **Java中错误与异常机制**
 
 ​        Java中有两种出错的情况：异常（Exception）和错误（Error），它们都是继承于Throwable 父类。
 
 ​         **Error（错误）**：一般是和java虚拟机相关的问题，比如系统崩溃、虚拟机出错、动态链接失败等，这些错误应用程序提前是不知道的，只有程序运行出错了才能处理
+
 ​         **Exception：**Exception类及其子类是Throwable的一种形式，它指出了合理的应用程序想要捕获的条件
 
-- SQLException：该异常提供关于数据库访问错误或其他错误的信息。
+-    SQLException：该异常提供关于数据库访问错误或其他错误的信息。
+-    RuntimeException 是那些可能在 Java 虚拟机正常运行期间抛出的异常的超类
+-    IOException：此类为异常的通用类，它是由失败的或中断的 I/O 操作生成的。
 
-- RuntimeException 是那些可能在 Java 虚拟机正常运行期间抛出的异常的超类
-
-- IOException：此类为异常的通用类，它是由失败的或中断的 I/O 操作生成的。
-
----
-
-
-
-​    
-
-![有帮助的截图](/assets/Blog/java/iostream.png)	
+![](C:\Users\Qi\Desktop\yichang.gif)
 
 ```java
 在类实例化时运行	
