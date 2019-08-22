@@ -1,15 +1,17 @@
 ---
 layout: post
-title:  "WebSocket探究与应用"
-categories: JavaScript
-tags:  WebSocket 通信 协议
+title:  "基于TCP/UDP的“仿微信聊天室”"
+categories: Java
+tags:  项目 
 ---
 
-* content
-{:toc}
 
-## WebSocket 适用场景
 
-## WebSocket 原理
+**主要功能：**用户注册登入，查询用户，添加好友，发送消息，视频聊天，发送表情包。
+**设计思路：**客户端显示聊天界面，服务器提供多线程处理来自不同客户端的消息，数据库存储用户信息（用户账号，密码，好友列表等）。
+**技术方案：**使用Socket实现客户端和服务器之间的连接，客户端配置连接服务器的IP地址和端口号。数据传递使用IO流来实现
 
-## WebSocket 浏览器兼容性
+
+
+
+
