@@ -1,16 +1,18 @@
 ---
 layout:     post
-title:      "Java中static关键字 "
+title:      "Java 中的IO流（Stream） "
 date:       2016-12-16 
 categories: Java
-tags: Java 异常机制
+tags: Java 
 ---
 
-
-
-### Java 中的IO流（Stream）
-
 ​      在Java中按照读取/输出数据的长度可以分为字节流和字符流，字节流是按照一个字节一个字节的读取的；字符流是按照字符读取的，在Java中字节是8bit，字符的长度中文是两个字节，英文是一个字节。
+
+
+
+
+
+
 
 常用到的流有以下几种，字符流有：FileReader，InputStreamReader，BufferReader 等
 
