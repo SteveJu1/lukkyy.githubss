@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "个人博客 "
+title:      "如何搭建个人博客 "
 date:       2016-09-13 
 categories: Other
 tags: Blog
@@ -41,7 +41,7 @@ cd myblog # 进入myblog目录
 jekyll server
 ```
 
-
+[](./assets/404-bg.jpg)
 
 ####  [GitHub Pages](https://pages.github.com/) + [hexo](https://hexo.io/zh-cn/)  
 
