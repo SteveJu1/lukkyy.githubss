@@ -41,7 +41,7 @@ cd myblog # 进入myblog目录
 jekyll server
 ```
 
- [hel](https://https://lukkyy.github.io/assets/404-bg.jpg)
+ [hel](https://lukkyy.github.io/assets/404-bg.jpg)
 
 ####  [GitHub Pages](https://pages.github.com/) + [hexo](https://hexo.io/zh-cn/)  
 
