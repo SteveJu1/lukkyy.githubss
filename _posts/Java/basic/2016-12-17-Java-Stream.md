@@ -18,7 +18,7 @@ tags: Java
 
 字节流有：FileInputStream，DataInputStream，ByteArrayInputStream，BufferedIutputSteam，printStream 等，下面画了Java中流的继承关系图。
 
-![](C:\Users\Qi\Desktop\github_md\Java\Advanced\IO流.png)
+![](https://lukkyy.github.io/assets/java/basic/IO流.png)
 
 （通过API文档统计的所有IO流，有些流不是输入输出流都有。知道原因的麻烦告诉我哈）
 

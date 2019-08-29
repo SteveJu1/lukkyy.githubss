@@ -19,7 +19,7 @@ tags: Git
 
 #### 1. 版本控制系统
 &emsp;&emsp;给项目命名时，我们通常会根据版本号或时间来记录不同的版本。比如像这样：
-![](./assets/other//git.png)
+![](https://lukkyy.github.io/assets/other/git.png)
 
     文件进行多次的修改后，我们想要找回某一次的修改记录，查找起来会很麻烦。随着不同的版本越来越多，管理起来会很复杂。如果是多人合作开发的项目，修改合并非常容易出现冲突。这时候就需要版本控制系统（Version Control System，VCS）帮助我们管理文件和项目了。
 &emsp;&emsp;版本控制系统是记录文件**内容变化**，查阅特定**版本修订情况**的系统。有了他可以跟踪文件的改动，回到历史记录的某个时刻。
@@ -33,9 +33,9 @@ Note： 建议文本信息使用UTF-8编码（Notepad++的编码设置为UTF-8 w
 
 版本控制系统可分为：集中式和分布式版本控制系统
 &emsp;&emsp;集中式版本控制系统（SVN、CVS等）：版本库集中存放在**一个的服务器**，文件的所有修订，开发人员合作都要通过这台服务器修改。优缺点：管理方便、逻辑明确；必须联网才能工作.示意图如下：
-![](./assets/other/git2.png)
+![](https://lukkyy.github.io/assets/other/git2.png)
    分布式版本控制系统（Git）：没有中央服务器，每个人都可以把仓库clone到下来（仓库可理解为所有的项目文件）。然后在自己的电脑上对仓库做修改，如果要和别人合作，可以把项目pull给别人。优缺点：适合分布式开发，可以离线工作。
-![](./assets/other/serves.png)
+![](https://lukkyy.github.io/assets/other/serves.png)
 
 ### 4  Git与GitHub、GitLab的区别？
    Git 是一个**分布式版本控制系统**。我们通过Git 在本地创建仓库，记录不同文件的版本信息。GitHub是Git 仓库的**托管平台**，把自己的Git仓库存放到GitHub的网络平台上（note：因为GitHub只支持Git 作为唯一的版本库格式，所以叫GitHub）
@@ -46,7 +46,7 @@ Note： 建议文本信息使用UTF-8编码（Notepad++的编码设置为UTF-8 w
 &emsp;&emsp;安装 git 的方式在每种系统中各不相同，最简单的是直接去 git 官网下载, 让网站自动识别你的系统, 提供下载文件，关于教程官方也给出了文档，链接如下：
   &emsp;&emsp;  [Git官网下载](https://git-scm.com/downloads)     &emsp;&emsp;  [Git 官方安装文档](https://git-scm.com/book/zh/v2/起步-安装-Git)
 &emsp;&emsp;以Windows版本举个栗子，Git 也为 Windows 系统提供了 `.exe` 安装包, 直接从这里下载安装就可以了: https://git-scm.com/download/win ；推荐使用默认安装参数, 然后一路`下一步`到底. 安装好之后, 在桌面将会出现 `Git Bash`的程序；打开如下图所示：（Bash窗口是 git 在 Windows 上设置的一个Unix 的环境.）
-![](./assets/other/cmd.png)
+![](https://lukkyy.github.io/assets/other/cmd.png)
 
 ####  2 Git 介绍
  Git 项目有三个工作区域：工作目录、暂存区域、仓库
@@ -64,7 +64,7 @@ Git的文件的4种状态（status），不同状态之间可通过命令转换�
 文件提交到仓库后，任务可以说完成了。如果后面我们对 `1.txt`进行了修改 ，状态会改变              `status： Modified`
 这是改变的文件需要重新 add ，commit到 仓库；
 整个上述过程可以被这张 git 官网上的流程图直观地表现:
-![](./assets/other/GitStatus.png)
+![](https://lukkyy.github.io/assets/other/GitStatus.png)
 
 ## 三 、Git的初始化和配置
 ####  1 初始化创建版本库
@@ -455,7 +455,7 @@ $ git push origin master
 ```
 ## 六、GitHub
 &emsp;&emsp;Github客户端是Git的图形界面窗口，功能不如Git强大，不过使用起来很方便。使用更多的是Github的网站，先在 [github](https://github.com/) 注册一个 github 账户, 然后添加你的一个 online 版本库 repository:    [Github客户端下载地址](https://desktop.github.com/)
-![](./assets/other/new-repository.png)
+![](https://lukkyy.github.io/assets/other/new-repository.png)
 
 连接本地版本库 
 
@@ -468,7 +468,7 @@ $ git remote rm origin          # 删除 origin，添加你自己的仓库
 $ git remote add origin " "
 ```
  &emsp;&emsp; git push时会弹出窗口，让用户输入账号密码
-![](./assets/other/GithubLogin.png)
+![](https://lukkyy.github.io/assets/other/GithubLogin.png)
 
 推送修改
 
